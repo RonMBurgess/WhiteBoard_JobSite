@@ -1,0 +1,32 @@
+SQL Script for adding a user to the Wrodpress database.
+Instructions:
+First Query:
+	- First of all, change ONLY the fields in the VALUES parameter. Leave everything in the first set of parentheses alone. That is all require to create a new user.
+	- Using this script as is WILL cause an error. You must enter relevant data into the VALUES parameter, otherwise you will get a type mismatch.
+	- user_no: the user number in the Users table. Make sure this is unique if you want to add a new user.
+	- user_name: the desired user name.
+	- MD5('password') - enter the desired password in place of "password". You must use MD5 hashing with Wordpress otherwise it will always give you an incorrect password upon login.
+	- Name: first and last name
+	- email@domain.com: You can put your email in if you want but you don't have to
+	- You can leave user_url set to NULL - it's not required.
+	- user_registered: the date that the user was registered - doesn't really matter just use the current date.
+	- user_activation_kay: leave this empty I'm not exactly sure what it is but I think it for regular users to activate their account.
+	- user_status: not exactly sure what 0 means but I believe it means activated - this explains why you don't have to check your email after you create a new user using this script
+	- display_name: name that you want shown for this account
+
+Second Query:
+	- Change 'user_no' to match the user_no you used in the first query. Leave everything else alone.
+
+Third Query:
+	- Same thing as the second query.
+
+Last steps:
+	- After you have gone through and changed the values to what you want them to be, copy and paste the code below into the SQL tab and run it. The result should be a new administrator.
+
+INSERT INTO `Whiteboard_JobSite`.`wp_users` (`ID`, `user_login`, `user_pass`, `user_nicename`, `user_email`, `user_url`, `user_registered`, `user_activation_key`, `user_status`, `display_name`) VALUES ('user_no', 'user_name', MD5('password'), 'Name', 'email@domain.com', NULL, '2014-03-16 00:00:00', '', '0', 'Name');
+
+
+INSERT INTO `Whiteboard_JobSite`.`wp_usermeta` (`umeta_id`, `user_id`, `meta_key`, `meta_value`) VALUES (NULL, 'user_no', 'wp_capabilities', 'a:1:{s:13:"administrator";b:1;}');
+
+
+INSERT INTO `Whiteboard_JobSite`.`wp_usermeta` (`umeta_id`, `user_id`, `meta_key`, `meta_value`) VALUES (NULL, 'user_no', 'wp_user_level', '10');
