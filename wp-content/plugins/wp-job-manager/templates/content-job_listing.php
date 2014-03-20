@@ -6,6 +6,8 @@
 			<div class="company">
 				<?php the_company_name( '<strong>', '</strong> ' ); ?>
 				<?php the_company_tagline( '<span class="tagline">', '</span>' ); ?>
+				<?php echo get_post_meta( $post->ID, '_job_salary', true ); ?>
+				<?php echo the_content(); ?>
 			</div>
 		</div>
 		<div class="location">

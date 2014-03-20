@@ -522,3 +522,28 @@ require get_template_directory() . '/inc/customizer.php';
 if ( ! class_exists( 'Featured_Content' ) && 'plugins.php' !== $GLOBALS['pagenow'] ) {
 	require get_template_directory() . '/inc/featured-content.php';
 }
+add_filter( 'submit_job_form_fields', 'frontend_add_salary_field' );
+function frontend_add_salary_field( $fields ) {
+    $fields['job']['job_salary'] = array(
+        'label'       => __( 'Salary', 'job_manager' ),
+        'type'        => 'text',
+        'required'    => true,
+        'placeholder' => '$/hr or $/week',
+        'priority'    => 7
+    );
+    return $fields;
+}
+add_action( 'job_manager_update_job_data', 'frontend_add_salary_field_save', 10, 2 );
+function frontend_add_salary_field_save( $job_id, $values ) {
+    update_post_meta( $job_id, '_job_salary', $values['job']['job_salary'] );
+}
+add_filter( 'job_manager_job_listing_data_fields', 'admin_add_salary_field' );
+function admin_add_salary_field( $fields ) {
+    $fields['_job_salary'] = array(
+        'label'       => __( 'Salary', 'job_manager' ),
+        'type'        => 'text',
+        'placeholder' => '$/hr or $/week',
+        'description' => ''
+    );
+    return $fields;
+}
