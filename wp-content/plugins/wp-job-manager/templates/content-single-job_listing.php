@@ -38,6 +38,7 @@
 
 		<div class="job_description" itemprop="description">
 			<?php echo apply_filters( 'the_job_description', get_the_content() ); ?>
+			<?php echo get_post_meta( $post->ID, '_job_salary', true ); ?>
 		</div>
 
 		<?php if ( ! is_position_filled() && $post->post_status !== 'preview' ) get_job_manager_template( 'job-application.php' ); ?>
