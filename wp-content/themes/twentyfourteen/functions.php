@@ -55,6 +55,15 @@ if ( ! function_exists( 'twentyfourteen_setup' ) ) :
  *
  * @since Twenty Fourteen 1.0
  */
+
+// Shortcode fot the apprentice profiles plugin
+
+function submit_profile() {
+	include(site_url() . '\wp-content\plugins\apprentice-profiles\profile-submit.php');
+}
+
+add_shortcode('submit_profile_form', 'submit_profile');
+
 function twentyfourteen_setup() {
 
 	/*
@@ -502,6 +511,39 @@ function twentyfourteen_wp_title( $title, $sep ) {
 
 	return $title;
 }
+
+// Salary field for main form
+add_filter('submit_job_form_fields', 'frontend_add_salary_field');
+
+function frontend_add_salary_field($fields) {
+	$fields['job']['job_salary'] = array(
+		'label' => __('Salary', 'job_manager'),
+		'type' => 'text',
+		'required' => true,
+		'placeholder' => '',
+		'priority' => 7
+	);
+	return $fields;
+}
+
+add_action('job_manager_update_job_data', 'frontend_add_salary_field_save', 10, 2);
+
+function frontend_add_salary_field_save($job_id, $values) {
+	update_post_meta($job_id, '_job_salary', $values['jpb']['job_salary']);
+}
+
+add_filter( 'job_manager_job_listing_data_fields', 'admin_add_salary_field' );
+
+function admin_add_salary_field($fields) {
+	$fields['_job_salary'] = array(
+		'label' => __('Salary', 'job_manager'),
+		'type' => 'tect',
+		'placeholder' => '',
+		'description' => ''
+	);
+	return $fields;
+}
+
 add_filter( 'wp_title', 'twentyfourteen_wp_title', 10, 2 );
 
 // Implement Custom Header features.
