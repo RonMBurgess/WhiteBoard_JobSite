@@ -563,8 +563,8 @@ function frontend_add_salary_field( $fields ) {
 	$fields['job']['job_salary'] = array(
 		'label'		=> __ ( 'Salary', 'job_manager'),
 		'type'		=> 'text', //signify that this is a text field
-		'required'	=> false, // make this field required or optional
-		'placeholder'	=> '$/Hr',//dummy text that is shown before user enters their own information.
+		'required'	=> true, // make this field required or optional
+		'placeholder'	=> '    $/Hr',//dummy text that is shown before user enters their own information.
 		'priority'		=> 7 	//Change where the field is shown on the submission form.	
 	);
 
