@@ -7,11 +7,8 @@
 				<?php the_company_name( '<strong>', '</strong> ' ); ?>
 				<?php the_company_tagline( '<span class="tagline">', '</span>' ); ?>
 				<?php echo get_post_meta( $post->ID, '_job_salary', true ); ?>
-<<<<<<< HEAD
 				<?php echo the_content(); ?> 
-=======
 				<?php content('20'); ?>
->>>>>>> origin/3/20-kevin-job-list-display-changes
 			</div>
 		</div>
 		<div class="location">
