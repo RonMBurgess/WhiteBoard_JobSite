@@ -38,9 +38,13 @@
 
 		<div class="job_description" itemprop="description">
 			<?php echo apply_filters( 'the_job_description', get_the_content() ); ?>
+			<?php echo "Skill Requirements: "; ?><?php echo get_post_meta( $post->ID, '_job_skRequirements', true ); ?><br/>
+			<?php echo "Experience Requirements: "; ?><?php echo get_post_meta( $post->ID, '_job_expRequirements', true ); ?><br/>
+			<?php echo "Salary: "; ?><?php echo get_post_meta( $post->ID, '_job_salary', true ); ?><br/>
 		</div>
 
 		<?php if ( ! is_position_filled() && $post->post_status !== 'preview' ) get_job_manager_template( 'job-application.php' ); ?>
 
 	<?php endif; ?>
+[ssba]
 </div>

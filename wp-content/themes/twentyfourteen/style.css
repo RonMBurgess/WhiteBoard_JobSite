@@ -4182,3 +4182,5 @@ a.post-thumbnail:hover {
 		line-height: 36px;
 	}
 }
+div#content div.job_listings div.company p * {color: #999 !important; background-color: transparent !important; font-size: 100% !important; font-family: inherit !important; font-weight: normal !important; font-style: normal !important;}
+div#content div.job_listings div.company span {color: #999 !important; background-color: transparent !important; font-size: 100% !important; font-family: inherit !important; font-weight: normal !important; font-style: normal !important;}
