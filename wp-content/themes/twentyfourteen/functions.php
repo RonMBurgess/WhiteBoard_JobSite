@@ -600,3 +600,52 @@ array_pop($content);
 $content = implode(" ",$content)."...";
 echo $content;
 }
+
+
+//the following adds the new Job Requirements Fields function to the job submission section .
+add_filter( 'submit_job_form_fields', 'frontend_add_skRequirements_field' );
+//now the Job Submission field will run this function when it is opened.
+function frontend_add_skRequirements_field( $fields ) {
+	//access the new field job_salary found in the array.
+	//turn job_salary field into an array and supply the information
+	$fields['job']['job_skRequirements'] = array(
+		'label'		=> __ ( 'Skill Requirements', 'job_manager'),
+		'type'		=> 'text', //signify that this is a text field
+		'required'	=> false, // make this field required or optional
+		'placeholder'	=> 'Skill 1, Skill 2, Skill 3, etc.',//dummy text that is shown before user enters their own information.
+		'priority'		=> 7 	//Change where the field is shown on the submission form.	
+	);
+
+	return $fields;
+}
+
+//the following adds the new Job Requirements Fields function to the job submission section .
+add_filter( 'submit_job_form_fields', 'frontend_add_expRequirements_field' );
+//now the Job Submission field will run this function when it is opened.
+function frontend_add_expRequirements_field( $fields ) {
+	//access the new field job_salary found in the array.
+	//turn job_salary field into an array and supply the information
+	$fields['job']['job_expRequirements'] = array(
+		'label'		=> __ ( 'Experience Requirements', 'job_manager'),
+		'type'		=> 'text', //signify that this is a text field
+		'required'	=> false, // make this field required or optional
+		'placeholder'	=> '2 years php, 5 years sales, etc.',//dummy text that is shown before user enters their own information.
+		'priority'		=> 8 	//Change where the field is shown on the submission form.	
+	);
+
+	return $fields;
+}
+
+//the following saves and stores the skill requirement field information in the database.
+add_action('job_manager_update_job_data', 'frontend_add_skRequirements_field_save', 10,2);
+
+function frontend_add_skRequirements_field_save( $job_id, $values){
+	update_post_meta($job_id, '_job_skRequirements', $values['job']['job_skRequirements']);
+}
+
+//the following saves and stores the experience requirement field information in the database.
+add_action('job_manager_update_job_data', 'frontend_add_expRequirements_field_save', 10,2);
+
+function frontend_add_expRequirements_field_save( $job_id, $values){
+	update_post_meta($job_id, '_job_expRequirements', $values['job']['job_expRequirements']);
+}
