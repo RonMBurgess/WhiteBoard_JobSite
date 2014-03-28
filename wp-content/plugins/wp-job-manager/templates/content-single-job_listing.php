@@ -38,6 +38,8 @@
 
 		<div class="job_description" itemprop="description">
 			<?php echo apply_filters( 'the_job_description', get_the_content() ); ?>
+			<?php echo get_post_meta( $post->ID, '_job_skRequirements', true ); ?>
+			<?php echo get_post_meta( $post->ID, '_job_expRequirements', true ); ?>
 			<?php echo get_post_meta( $post->ID, '_job_salary', true ); ?>
 		</div>
 
