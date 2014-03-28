@@ -6,7 +6,11 @@
 			<div class="company">
 				<?php the_company_name( '<strong>', '</strong> ' ); ?>
 				<?php the_company_tagline( '<span class="tagline">', '</span>' ); ?>
+<<<<<<< HEAD
 				<?php echo get_post_meta( $post->ID, '_job_salary', true ); ?>
+=======
+				<?php echo get_post_meta( $post->ID, '_job_salary', true ); ?> 
+>>>>>>> 0c0fef781b04aa1800a3be305b1eea9324962d86
 				<?php content('20'); ?>
 			</div>
 		</div>
