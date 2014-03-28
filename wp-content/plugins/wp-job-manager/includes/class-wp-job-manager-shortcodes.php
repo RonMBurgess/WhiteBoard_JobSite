@@ -325,6 +325,11 @@ class WP_Job_Manager_Shortcodes {
 
 		return ob_get_clean();
 	}
+
+	public function profile() {
+		
+	}
+
 }
 
 new WP_Job_Manager_Shortcodes();
